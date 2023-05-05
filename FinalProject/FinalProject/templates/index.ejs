@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
+    <title>@MyChannel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Handlee', cursive;
+            background-color: antiquewhite;
+        }
+
+        /* Splash Animation */
+
+        .intro {
+            position: fixed;
+            z-index: 5;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #161616;
+            transition: 1s;
+        }
+
+        button {
+            display: block;
+            margin-top: 100%;
+            margin: 0 auto;
+            width: 260px;
+            height: 36px;
+            border-radius: 30px;
+            background: burlywood;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .logo-header {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #161616;
+            color: #ffffff;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-block;
+            bottom: -20px;
+            opacity: 0;
+            background-color: #161616;
+        }
+
+        .logo.active {
+            bottom: 0;
+            opacity: 1;
+            transition: ease-in-out 0.5s;
+        }
+        
+        .logo.fade {
+            bottom: 150px;
+            opacity: 0;
+            transition: ease-in-out 0.5s;
+        }
+
+        /* Number Info */
+
+        .main {
+            position: absolute;
+            top: 30%;
+            left: 35%;
+            text-align: center;
+            margin: 50px 0;
+            padding: 0;
+        }
+        
+        .main li {
+            list-style: none;
+            display: inline-block;
+            margin: 0 20px;
+        }
+
+        .main span {
+            font-size: 25px;
+        }
+
+        .main h1 {
+            margin-bottom: 50px;
+        }
+
+        .main h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin: 10px 0;
+        }
+        
+        /* Burger Menu */
+        nav {
+            background: #161616;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav .mainMenu {
+            display: flex;
+            list-style: none;
+        }
+
+        nav .mainMenu li a {
+            display: inline-block;
+            padding: 15px;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        nav .mainMenu li a:hover {
+            background: antiquewhite;
+            color: black;
+        }
+
+        nav .openMenu {
+            color: white;
+            font-size: 2rem;
+            margin: 20px;
+            display: none;
+            cursor: pointer;
+        }
+
+        nav .mainMenu .closeMenu, i {
+            font-size: 2rem;
+            display: none;
+            cursor: pointer;
+        }
+
+        nav .logo1 {
+            margin: 6px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        @media(max-width: 5000px){
+            nav .mainMenu{
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 10;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: #000;
+                transition: top 1s ease;
+                display: none;
+            }
+
+            nav .mainMenu .closeMenu {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                
+            }
+
+            nav .openMenu {
+                display: block;
+            }
+
+            nav .mainMenu li a:hover {
+                background: none;
+                color: rgb(255,123,0);
+                font-size: 1.6rem;
+            }
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <% if(!isAuthenticated) { %>
+        <div class="intro">
+            <h1 class="logo-header">
+                <span class="logo">@My</span><span class="logo">Channel</span>
+            </h1>
+        </div>
+    <% }  %>
+    
+
+    <nav>
+        <div class="logo1"><h1>@MyChannel</h1></div>
+        <div class="openMenu"><i class="fa fa-bars"></i></div>
+        <ul class="mainMenu">
+            <li><a href="/home">@HOME</a></li>
+            <% if(!isAuthenticated) { %>
+            <li><a href="/login">@LOGIN</a></li>
+            <% } else { %>
+                <li><a href="/login">@LOGOUT</a></li>
+            <% } %>
+            <li><a href="/about">@ABOUT</a></li>
+            <div class="closeMenu"><i class="fa fa-times"></i></div>
+        </ul>
+    </nav>
+
+    <div class="main">
+        <% if(!isAuthenticated) { %>
+            <h1>@CURRENT STATUS</h1>
+        <ul>
+            <li>
+                <span><%- visits %></span>
+                <h3>@TOTAL-VISITORS</h3>
+            </li>
+            <li>
+                <span><%- members %></span>
+                <h3>@MEMBER</h3>
+            </li>
+            <li>
+                <span><%- posts %></span>
+                <h3>@POST</h3>
+            </li>
+        </ul>
+        <% } else { %>
+            <h1>Successfully logged in!!</h1>
+            <button onclick="window.location.href='/home';">@HOME</button>
+            <% } %>
+    </div>
+
+    <script>
+        let intro = document.querySelector(`.intro`);
+        let logo = document.querySelector(`.logo-header`);
+        let logoSpan = document.querySelectorAll(".logo");
+
+        window.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                logoSpan.forEach((span, index) => {
+                    setTimeout(() => {
+                        span.classList.add('active');
+                    }, (index + 1) * 400)
+                });
+
+                setTimeout(() => {
+                    logoSpan.forEach((span, index) => {
+                        setTimeout(() => {
+                            span.classList.remove('active');
+                            span.classList.add('fade');
+                        }, (index + 1) * 50)
+                    })
+                }, 2000);
+
+                setTimeout(() => {
+                    intro.style.top = '-100vh';
+                }, 2300)
+
+            });
+        })
+
+        const mainMenu = document.querySelector(`.mainMenu`);
+        const closeMenu = document.querySelector(`.closeMenu`);
+        const openMenu = document.querySelector(`.openMenu`);
+
+        openMenu.addEventListener('click', () => {
+            mainMenu.style.display = 'flex';
+            mainMenu.style.top = '0';
+        });
+        closeMenu.addEventListener('click', () => {
+            mainMenu.style.top = '-100%';
+        });
+
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
+    <title>Home Board</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Handlee', cursive;
+            background-color: antiquewhite;
+        }
+
+        .main {
+            overflow: hidden;
+            position: relative;
+            width: 900px;
+            height: 550px;
+            margin: 0 auto 100px;
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input, button {
+            border: none;
+            outline: none;
+            background: none;
+            font-family: "Handlee", cursive;
+        }
+
+        button {
+            display: block;
+            margin-top: 100%;
+            margin: 0 auto;
+            width: 260px;
+            height: 36px;
+            border-radius: 30px;
+            background: burlywood;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        h2 {
+            width: 100%;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            width: 260px;
+            margin: 25px auto 0;
+            text-align: center;
+        }
+        label span {
+            font-size: 12px;
+            color: gray;
+            text-transform: uppercase;
+        }
+
+        .left {
+            text-align: center;
+            width: 70%;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right {
+            padding-right: 15px;
+            background-image: url("https://images.unsplash.com/photo-1631631480669-535cc43f2327?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80");
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Burger Menu */
+        nav {
+            background: #161616;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav .mainMenu {
+            display: flex;
+            list-style: none;
+        }
+
+        nav .mainMenu li a {
+            display: inline-block;
+            padding: 15px;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        nav .mainMenu li a:hover {
+            background: antiquewhite;
+            color: black;
+        }
+
+        nav .openMenu {
+            color: white;
+            font-size: 2rem;
+            margin: 20px;
+            display: none;
+            cursor: pointer;
+        }
+
+        nav .mainMenu .closeMenu, i {
+            font-size: 2rem;
+            display: none;
+            cursor: pointer;
+        }
+
+        nav .logo1 {
+            margin: 6px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        @media(max-width: 5000px){
+            nav .mainMenu{
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 10;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: #000;
+                transition: top 1s ease;
+                display: none;
+            }
+
+            nav .mainMenu .closeMenu {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                
+            }
+
+            nav .openMenu {
+                display: block;
+            }
+
+            nav .mainMenu li a:hover {
+                background: none;
+                color: rgb(255,123,0);
+                font-size: 1.6rem;
+            }
+        }
+
+        .profileInfo {
+            width: 200px;
+            margin: 0 auto;
+            padding: 0.5em;
+            border: 1px solid #888;
+            border-radius: 5px;
+            box-shadow: 5px 5px 5px #0008;
+        }
+        .profileInfo img {
+            width: 100%;
+        }
+        .profileInfo .name {
+            font-size: 2em;
+            margin: 0;
+            text-align: center;
+            color: white;
+        }
+        #write_area {
+	        margin-top: 50px;
+	        font-family: 'Handlee', cursive;
+	        font-size:14px;
+        }
+        #in_name {
+	        margin-top:10px;
+        }
+        #in_name textarea {
+	        font-family: 'Handlee', cursive;
+	        font-size:26px;
+	        color:#333;
+	        width: 600px;
+	        border:none;
+	        resize: none;
+            }
+        #in_title {
+	        margin-top:15px;
+        }
+        #in_title textarea {
+	        font-family: 'Handlee', cursive;
+	        font-size:26px;
+	        color:#333;
+	        width: 600px;
+	        border:none;
+	        resize: none;
+        }
+        .wi_line {
+	        border:solid 1px lightgray;
+	        margin-top:10px;
+        }
+        #in_content {
+	        margin-top:10px;
+        }
+        #in_content textarea {
+	        font-family: 'Handlee', cursive;
+	        font:14px;
+	        color:#333;
+	        width: 600px;
+	        height: 300px;
+	        resize: none;
+        }
+        #in_pw input {
+	        font-family: 'Handlee', cursive;
+	        font:14px;
+	        margin-top:10px;
+        }
+        .bt_se {
+	        font-family: 'Handlee', cursive;
+	        margin-top:20px;
+	        text-align:center;
+        }
+        .bt_se button {
+	        width:100px;
+	        height:30px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo1"><h1>@MyChannel</h1></div>
+        <div class="openMenu"><i class="fa fa-bars"></i></div>
+        <ul class="mainMenu">
+            <li><a href="/home">@HOME</a></li>
+            <% if(!isAuthenticated) { %>
+            <li><a href="/login">@LOGIN/JOIN</a></li>
+            <% } else { %>
+            <li><a href="/write">@WRITE</a></li>
+            <li><a href="/logout">@LOGOUT</a></li>
+            <% } %>
+            <li><a href="/about">@ABOUT</a></li>
+            <div class="closeMenu"><i class="fa fa-times"></i></div>
+        </ul>
+    </nav>
+
+    <div class="main">
+        <div class="left">
+            <div class="table">
+                <% if(!isAuthenticated) { %>
+                <h2>This is page is member-only!!</h2><br>
+                <button onclick="window.location.href='/login';">@Login/Join</button>
+                <% } else { %>
+                    <h2>Update your opinion!</h2>
+                    <div id="write_area">
+                        <form action="./modify-ok" method="post">
+                            <input type="text" name="id" id="id" value="<%= post._id %>" readonly>
+                          <div id="in_title">
+                            <textarea name="title" id="utitle" rows="1" cols="20" maxlength="100" required><%= post.title %></textarea>
+                          </div>
+                          <div class="wi_line"></div>
+                          <div id="in_content">
+                            <textarea name="content" id="ucontent" required><%= post.content %></textarea>
+                          </div>
+                          <div class="bt_se">
+                            <button type="submit">Update</button>
+                          </div>
+                        </form>
+                      </div>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="right">
+            <% if(!isAuthenticated) { %>
+            <h2 style="color:white">Become a member to post!!</h2><br>
+            <% } else { %>
+                <div class="profileInfo">
+                    <img src="<%= user.picture %>" />
+                    <p class="name">
+                        Welcome, <%= user.nickname.charAt(0).toUpperCase() + user.nickname.slice(1) %>
+                    </p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    
+
+    <script>
+
+        const mainMenu = document.querySelector(`.mainMenu`);
+        const closeMenu = document.querySelector(`.closeMenu`);
+        const openMenu = document.querySelector(`.openMenu`);
+
+
+        openMenu.addEventListener('click', () => {
+            mainMenu.style.display = 'flex';
+            mainMenu.style.top = '0';
+        });
+        closeMenu.addEventListener('click', () => {
+            mainMenu.style.top = '-100%';
+        });
+
+
+    </script>
+    
+</body>
+</html>

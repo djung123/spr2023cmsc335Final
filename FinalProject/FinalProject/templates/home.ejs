@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
+    <title>Home Board</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Handlee', cursive;
+            background-color: antiquewhite;
+        }
+
+        .main {
+            overflow: hidden;
+            position: relative;
+            width: 900px;
+            height: 550px;
+            margin: 0 auto 100px;
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input, button {
+            border: none;
+            outline: none;
+            background: none;
+            font-family: "Handlee", cursive;
+        }
+
+        button {
+            display: block;
+            margin-top: 100%;
+            margin: 0 auto;
+            width: 260px;
+            height: 36px;
+            border-radius: 30px;
+            background: burlywood;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        h2 {
+            width: 100%;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            width: 260px;
+            margin: 25px auto 0;
+            text-align: center;
+        }
+        label span {
+            font-size: 12px;
+            color: gray;
+            text-transform: uppercase;
+        }
+
+        .left {
+            text-align: center;
+            width: 70%;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right {
+            padding-right: 15px;
+            background-image: url("https://images.unsplash.com/photo-1631631480669-535cc43f2327?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80");
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Burger Menu */
+        nav {
+            background: #161616;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav .mainMenu {
+            display: flex;
+            list-style: none;
+        }
+
+        nav .mainMenu li a {
+            display: inline-block;
+            padding: 15px;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        nav .mainMenu li a:hover {
+            background: antiquewhite;
+            color: black;
+        }
+
+        nav .openMenu {
+            color: white;
+            font-size: 2rem;
+            margin: 20px;
+            display: none;
+            cursor: pointer;
+        }
+
+        nav .mainMenu .closeMenu, i {
+            font-size: 2rem;
+            display: none;
+            cursor: pointer;
+        }
+
+        nav .logo1 {
+            margin: 6px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        @media(max-width: 5000px){
+            nav .mainMenu{
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 10;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: #000;
+                transition: top 1s ease;
+                display: none;
+            }
+
+            nav .mainMenu .closeMenu {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                
+            }
+
+            nav .openMenu {
+                display: block;
+            }
+
+            nav .mainMenu li a:hover {
+                background: none;
+                color: rgb(255,123,0);
+                font-size: 1.6rem;
+            }
+        }
+
+        .profileInfo {
+            width: 200px;
+            margin: 0 auto;
+            padding: 0.5em;
+            border: 1px solid #888;
+            border-radius: 5px;
+            box-shadow: 5px 5px 5px #0008;
+        }
+        .profileInfo img {
+            width: 100%;
+        }
+        .profileInfo .name {
+            font-size: 2em;
+            margin: 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .page_num li{
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+	        list-style-type:none;
+	        margin-top:-10px;
+	        max-width:570px;
+	        padding:0;
+        }
+
+        .table {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            align-items: center;
+            text-align: center;
+        }
+
+        .table .post-table{
+            position: relative;
+            height: 80%;
+            width: 100%;
+            overflow-y: scroll;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo1"><h1>@MyChannel</h1></div>
+        <div class="openMenu"><i class="fa fa-bars"></i></div>
+        <ul class="mainMenu">
+            <li><a href="/home">@HOME</a></li>
+            <% if(!isAuthenticated) { %>
+            <li><a href="/login">@LOGIN/JOIN</a></li>
+            <% } else { %>
+            <li><a href="/write">@WRITE</a></li>
+            <li><a href="/logout">@LOGOUT</a></li>
+            <% } %>
+            <li><a href="/about">@ABOUT</a></li>
+            <div class="closeMenu"><i class="fa fa-times"></i></div>
+        </ul>
+    </nav>
+
+    <div class="main">
+        <div class="left">
+            <div class="table">
+                <% if(!isAuthenticated) { %>
+                <h2 style="margin-top: 250px;">This is page is member-only!!</h2><br>
+                <button onclick="window.location.href='/login';">@Login/Join</button>
+                <% } else { %>
+                    <% if(!content) { %>
+                    <button onclick="window.location.href='/home?page=1';" style="margin-top: 300px">@SHOW POSTS</button>
+                    <% } else { %>
+                        <div class="post-table">
+                            <table class="list-table" style="width:100%">
+                                <thead>
+                                  <tr>
+                                    <th width="140">Number</th>
+                                    <th width="200">Title</th>
+                                    <th width="240">Writer</th>
+                                    <th width="200">Date</th>
+                                  </tr>
+                                </thead>
+                                <div class="table-body">
+                                    <tbody>
+                                        <% content.list.forEach((elem, ind) => { %>
+                                            <tr style="height:30px"></tr>
+                                            <td style="width:10%"><%= index[ind] %></td>
+                                            <td style="width:30%"><a href="/read?page=<%= `${page}` %>&title=<%= `${elem.title}` %>&id=<%= `${elem._id}` %>"><%= elem.title %></a></td>
+                                            <td style="width:35%"><%= elem.writer.charAt(0).toUpperCase() + elem.writer.slice(1) %></td>
+                                            <td style="width:25%"><%= elem.date %></td>
+                                            </tr>
+                                        <% }) %>
+                                </tbody>
+                                </div>
+                                
+                            </table>
+                        </div>
+                            
+                            <br>
+                        <div class="page_num">
+                            <ul>
+                                <li><a href='?page=1'>First</a></li> 
+                                <% content.indarr.forEach(elem => { %>
+                                    <% if(Number(elem) === Number(page)) { %>
+                                        <li style="font-size: 1rem;"><strong><a href='?page=<%= elem %>'>[<%= `${elem}` %>]</a></strong></li>
+                                    <% } else { %>
+                                    <li><a href='?page=<%= elem %>'>[<%= `${elem}` %>]</a></li>
+                                    <% } %>
+                                <% }) %>
+                                
+                                <% if(page < content.totalPage) { %>
+                                    <li><a href='?page=<%= `${Number(page)+1}` %>'>[Next]</a></li> 
+                                <% } %>
+                                    
+                            <li><a href='?page=<%= content.totalPage %>'>Last</a></li>  
+                        </ul>
+                        </div>
+                    <% } %>
+                <% } %>
+                
+            </div>
+        </div>
+
+        <div class="right">
+            <% if(!isAuthenticated) { %>
+            <h2 style="color:white;">Become a member to post!!</h2><br>
+            <% } else { %>
+                <div class="profileInfo">
+                    <img src="<%= user.picture %>" />
+                    <p class="name">
+                        Welcome, <%= user.nickname.charAt(0).toUpperCase() + user.nickname.slice(1) %>
+                    </p>
+                </div>
+                <button onclick="window.location.href='/write';">@WRITE</button>
+            <% } %>
+        </div>
+    </div>
+    
+
+    <script>
+
+        const mainMenu = document.querySelector(`.mainMenu`);
+        const closeMenu = document.querySelector(`.closeMenu`);
+        const openMenu = document.querySelector(`.openMenu`);
+
+
+        openMenu.addEventListener('click', () => {
+            mainMenu.style.display = 'flex';
+            mainMenu.style.top = '0';
+        });
+        closeMenu.addEventListener('click', () => {
+            mainMenu.style.top = '-100%';
+        });
+
+
+    </script>
+    
+</body>
+</html>
