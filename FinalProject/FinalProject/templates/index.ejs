@@ -240,7 +240,8 @@
             <% } %>
     </div>
 
-    <script>
+    <script defer>
+
         let intro = document.querySelector(`.intro`);
         let logo = document.querySelector(`.logo-header`);
         let logoSpan = document.querySelectorAll(".logo");
@@ -268,6 +269,7 @@
 
             });
         })
+        
 
         const mainMenu = document.querySelector(`.mainMenu`);
         const closeMenu = document.querySelector(`.closeMenu`);
@@ -281,6 +283,7 @@
             mainMenu.style.top = '-100%';
         });
 
+        
         
 
     </script>
